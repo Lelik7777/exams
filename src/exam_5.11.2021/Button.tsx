@@ -7,11 +7,8 @@ type PropsType = {
 
 }
 export const Button = ({disabled, title, callBack}: PropsType) => {
-    const onClick = () => {
-        callBack()
-    }
     return (
 
-        <button onClick={onClick} disabled={disabled}>{title}</button>
+        <button onClick={callBack} disabled={disabled}>{title}</button>
     )
 }
