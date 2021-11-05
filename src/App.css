@@ -50,4 +50,5 @@ button {
     border-radius: 20px;
     cursor: pointer;
     background-color: cyan;
+    font-size: 1.3rem;
 }

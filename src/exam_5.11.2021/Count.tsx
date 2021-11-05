@@ -20,7 +20,7 @@ export const Count = () => {
                         callBack={changeCount}
                 />
                 <Button title={'reset'}
-                        disabled={count < 5 ? true : false}
+                        disabled={count > 0 ? false : true}
                         callBack={zeroing}
                 />
             </div>
