@@ -1,13 +1,14 @@
 import React from 'react';
 import './App.css';
-import {Count} from './exam_5.11.2021/Count';
+import {Count} from './exam_5.11.2021/components/Count';
+import {Set} from './exam_5.11.2021/components/Set';
 
-function App() {
+export function App() {
     return (
-        <div className="App">
+        <div className="app">
             <Count/>
+            <Set/>
         </div>
     );
 }
 
-export default App;

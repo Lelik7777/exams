@@ -4,13 +4,13 @@ type PropsType = {
     count: number;
     maxValue: number;
 }
-export const Display = ({count}: PropsType) => {
+export const Display = ({count, maxValue}: PropsType) => {
     const style = {
-        color: count === 5 ? 'red' : '',
+        color: count === maxValue ? 'red' : '',
     }
     return (
         <div className={'display'}>
-            <div style={style}>{count}</div>
+            <div className={'block_display'} style={style}>{count}</div>
         </div>
     )
 }

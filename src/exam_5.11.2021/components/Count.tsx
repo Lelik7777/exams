@@ -7,17 +7,17 @@ export const Count = () => {
     const maxValue = 5;
     const minValue = 0;
     const changeCount = () => {
-        count <= maxValue && setCount(count++);
+        let value = count;
+        count <= maxValue && value++;
+        setCount(value);
     }
     const zeroing = () => {
         setCount(minValue);
     }
     return (
         <div className={'container'}>
-
             <Display count={count} maxValue={maxValue}/>
-
-            <div className={'wrapper'}>
+            <div className={'wrapper_buttons_count'}>
                 <Button title={'inc'}
                         disabled={count === maxValue ? true : false}
                         callBack={changeCount}
@@ -27,6 +27,7 @@ export const Count = () => {
                         callBack={zeroing}
                 />
             </div>
+
         </div>
     )
 }
