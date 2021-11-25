@@ -86,9 +86,11 @@ button:disabled {
     text-align: center;
     font-size: 1.2rem;
 }
-.error{
+
+.error {
     background-color: red;
 }
+
 .span_value {
     display: inline-block;
     width: 65%;

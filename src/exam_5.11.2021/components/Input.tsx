@@ -1,22 +1,23 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent} from 'react';
 
 type PropsType = {
     type: string;
-    minValue?: number;
-    maxValue?: number;
-    //value?:number;
+    changeValue: ((v: number) => void)|undefined;
 }
-export const Input = ({type, minValue, maxValue, ...props}: PropsType) => {
-   const [value,setValue]=useState<number>(0)
+export const Input = ({
+                          type,
+                          changeValue, ...props
+                      }: PropsType) => {
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+        if(changeValue){
+            changeValue(+e.currentTarget.value);
+        }
 
-    /*const error={
-        backgroundColor:'red',
-    }*/
+    };
     return (
         <span className={'span_input'}>
             <input type={type}
-                   value={value}
-                   onChange={(e)=>setValue(+e.currentTarget.value)}
+                   onChange={onChange}
             />
         </span>
 

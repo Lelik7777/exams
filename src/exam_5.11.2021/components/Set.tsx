@@ -1,14 +1,19 @@
 import React from 'react';
-import {DisplayForSet} from './DisplayForSet';
 import {Button} from './Button';
+import {Display} from './Display';
 
-export const Set = () => {
+type PropsType = {
+    changeMaxValue: (v: number) => void;
+    changeMinValue: (v: number) => void;
+}
+export const Set = ({changeMinValue, changeMaxValue}: PropsType) => {
 
     return (
         <div className={'container'}>
-            <DisplayForSet/>
+            {/*<DisplayForSet changeMaxValue={changeMaxValue} changeMinValue={changeMinValue}/div>*/}
+            <Display type={false} changeMaxValue={changeMaxValue} changeMinValue={changeMinValue}/>
             <div className={'wrapper_buttons_count'}>
-                <Button disabled={true} title={'set'} callBack={() => {
+                <Button disabled={false} title={'set'} callBack={() => {
                 }}/>
             </div>
 

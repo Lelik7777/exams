@@ -1,22 +1,26 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Button} from './Button';
 import {Display} from './Display';
 
-export const Count = () => {
-    let [count, setCount] = useState<number>(0);
-    const maxValue = 5;
-    const minValue = 0;
-    const changeCount = () => {
-        let value = count;
-        count <= maxValue && value++;
-        setCount(value);
-    }
-    const zeroing = () => {
-        setCount(minValue);
-    }
+type PropsType = {
+    maxValue: number;
+    minValue: number;
+    count: number;
+    changeCount: () => void;
+    zeroing: () => void;
+}
+export const Count = ({
+                          maxValue,
+                          minValue,
+                          count,
+                          changeCount,
+                          zeroing
+                      }: PropsType) => {
+
+    console.log(`count=${count}`);
     return (
         <div className={'container'}>
-            <Display count={count} maxValue={maxValue}/>
+            <Display count={count} maxValue={maxValue} type={true}/>
             <div className={'wrapper_buttons_count'}>
                 <Button title={'inc'}
                         disabled={count === maxValue ? true : false}
