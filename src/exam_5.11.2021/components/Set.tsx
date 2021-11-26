@@ -10,6 +10,8 @@ type PropsType = {
     disableButSet: boolean;
     maxValue: number;
     minValue: number;
+    changeText: (b: boolean) => void;
+    text: boolean;
 }
 export const Set = ({
                         changeMinValue,
@@ -19,11 +21,14 @@ export const Set = ({
                         disableButSet,
                         minValue,
                         maxValue,
+                        changeText,
+                        text,
                     }: PropsType) => {
 
     const onClick = () => {
         setInitialValue();
         setDisableButSet(true);
+        changeText(false);
     }
     return (
         <div className={'container'}>
@@ -34,6 +39,8 @@ export const Set = ({
                      disableButSet={disableButSet}
                      maxValue={maxValue}
                      minValue={minValue}
+                     text={text}
+                     changeText={changeText}
             />
             <div className={'wrapper_buttons_count'}>
                 <Button disabled={disableButSet}

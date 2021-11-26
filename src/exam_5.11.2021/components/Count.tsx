@@ -9,6 +9,9 @@ type PropsType = {
     changeCount: () => void;
     setZeroing: () => void;
     disableButSet: boolean;
+    setDisableButSet: (b: boolean) => void;
+    text: boolean;
+    changeText: (b: boolean) => void;
 }
 export const Count = ({
                           maxValue,
@@ -17,6 +20,9 @@ export const Count = ({
                           changeCount,
                           setZeroing,
                           disableButSet,
+                          setDisableButSet,
+                          text,
+                          changeText,
                       }: PropsType) => {
 
     return (
@@ -27,8 +33,9 @@ export const Count = ({
                 minValue={minValue}
                 type={true}
                 disableButSet={disableButSet}
-                setDisableButSet={() => {
-                }}
+                setDisableButSet={setDisableButSet}
+                text={text}
+                changeText={changeText}
             />
             <div className={'wrapper_buttons_count'}>
                 <Button title={'inc'}
@@ -36,7 +43,7 @@ export const Count = ({
                         onClick={changeCount}
                 />
                 <Button title={'reset'}
-                        disabled={minValue > 0 && count > minValue ? false : true}
+                        disabled={minValue >= 0 && count > minValue ? false : true}
                         onClick={setZeroing}
                 />
             </div>
