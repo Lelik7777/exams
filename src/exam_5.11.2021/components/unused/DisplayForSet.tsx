@@ -1,6 +1,7 @@
-import React from 'react';
-import {Span} from './Span';
-import {Input} from './Input';
+/*import React from 'react';*/
+import {Span} from '../Span';
+/*
+import {Input} from '../Input';
 
 type PropsType = {
     changeMaxValue: (v: number) => void;
@@ -19,4 +20,4 @@ export const DisplayForSet = ({changeMaxValue, changeMinValue,}: PropsType) => {
             </div>
         </div>
     )
-}
+}*/

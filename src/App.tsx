@@ -6,34 +6,43 @@ import {Set} from './exam_5.11.2021/components/Set';
 export function App() {
     const [minValue, setMinValue] = useState(0);
     const [maxValue, setMaxValue] = useState(0);
+    const [count, setCount] = useState<number>(0);
+    const [disableButSet, setDisableButSet] = useState(false);
     const changeMaxValue = (v: number) => {
         setMaxValue(v);
-        console.log(maxValue);
     }
     const changeMinValue = (v: number) => {
         setMinValue(v);
-        console.log(minValue)
     }
-    let [count, setCount] = useState<number>(minValue);
-    console.log('min=', minValue);
     const changeCount = () => {
         let value = count;
         count <= maxValue && value++;
         setCount(value);
     }
-    const zeroing = () => {
+    const setZeroing = () => {
+        setCount(minValue);
+    }
+    const setInitialValue = () => {
         setCount(minValue);
     }
     return (
         <div className="app">
             <Count count={count}
                    changeCount={changeCount}
-                   zeroing={zeroing}
+                   setZeroing={setZeroing}
                    maxValue={maxValue}
                    minValue={minValue}
+                   disableButSet={disableButSet}
             />
             <Set
-                changeMinValue={changeMinValue} changeMaxValue={changeMaxValue}/>
+                changeMinValue={changeMinValue}
+                changeMaxValue={changeMaxValue}
+                setInitialValue={setInitialValue}
+                setDisableButSet={setDisableButSet}
+                disableButSet={disableButSet}
+                minValue={minValue}
+                maxValue={maxValue}
+            />
         </div>
     );
 }

@@ -7,28 +7,37 @@ type PropsType = {
     minValue: number;
     count: number;
     changeCount: () => void;
-    zeroing: () => void;
+    setZeroing: () => void;
+    disableButSet: boolean;
 }
 export const Count = ({
                           maxValue,
                           minValue,
                           count,
                           changeCount,
-                          zeroing
+                          setZeroing,
+                          disableButSet,
                       }: PropsType) => {
 
-    console.log(`count=${count}`);
     return (
         <div className={'container'}>
-            <Display count={count} maxValue={maxValue} type={true}/>
+            <Display
+                count={count}
+                maxValue={maxValue}
+                minValue={minValue}
+                type={true}
+                disableButSet={disableButSet}
+                setDisableButSet={() => {
+                }}
+            />
             <div className={'wrapper_buttons_count'}>
                 <Button title={'inc'}
                         disabled={count === maxValue ? true : false}
-                        callBack={changeCount}
+                        onClick={changeCount}
                 />
                 <Button title={'reset'}
-                        disabled={count > minValue ? false : true}
-                        callBack={zeroing}
+                        disabled={minValue > 0 && count > minValue ? false : true}
+                        onClick={setZeroing}
                 />
             </div>
 

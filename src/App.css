@@ -96,7 +96,10 @@ button:disabled {
     width: 65%;
     text-align: center;
 }
-
+.value_less_zero{
+    background-color: darkorange;
+    border: 2px solid red;
+}
 @media screen and (max-width: 1000px ) {
     .app {
         flex-direction: column;
