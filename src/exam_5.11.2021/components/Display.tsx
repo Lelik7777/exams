@@ -18,6 +18,7 @@ export const Display = ({
 
         <div className={'display'}>
             <div className={'block_display'} style={style}>
+
                 {count}
 
             </div>

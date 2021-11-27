@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Count} from './exam_5.11.2021/components/Count';
 import {Set} from './exam_5.11.2021/components/Set';
@@ -10,12 +10,23 @@ export function App() {
     const [count, setCount] = useState<number>(0);
     const [disableButSet, setDisableButSet] = useState(false);
     const [text, setText] = useState(true);
+
+    useEffect(() => {
+        let max = localStorage.getItem('max_value');
+        max && setMaxValue(JSON.parse(max));
+        let min = localStorage.getItem('min_value');
+        min && setMinValue(JSON.parse(min));
+    }, [])
+    useEffect(() => {
+        localStorage.setItem('min_value', JSON.stringify(minValue));
+        localStorage.setItem('max_value', JSON.stringify(maxValue));
+
+    }, [minValue, maxValue])
     const changeMaxValue = (v: number) => {
         setMaxValue(v);
     }
 
     const changeMinValue = (v: number) => {
-        debugger;
         setMinValue(v);
         console.log('min' + minValue)
     }
@@ -29,9 +40,6 @@ export function App() {
     }
     const setInitialValue = () => {
         setCount(minValue);
-    }
-    const changeText = (b: boolean) => {
-        setText(!b);
     }
     return (
         <div className="app">
