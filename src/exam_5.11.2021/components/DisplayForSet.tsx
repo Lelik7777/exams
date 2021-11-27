@@ -22,7 +22,7 @@ export const DisplayForSet = ({
                 <Input
                     type={'number'}
                     changeValue={changeMaxValue}
-                    value={maxValue}
+                    valueInput={maxValue}
                     className={''}//stub
                 />
             </div>
@@ -31,7 +31,7 @@ export const DisplayForSet = ({
                 <Input
                     type={'number'}
                     changeValue={changeMinValue}
-                    value={minValue}
+                    valueInput={minValue}
                     className={''}//stub
                 />
             </div>

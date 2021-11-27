@@ -3,57 +3,66 @@ import './App.css';
 import {Count} from './exam_5.11.2021/components/Count';
 import {Set} from './exam_5.11.2021/components/Set';
 
-export function App() {
+export type ValueType = {
+    min: number;
+    max: number;
+    count: number;
+}
 
-    const [minValue, setMinValue] = useState(0);
+export function App() {
+    const [value, setValue] = useState<ValueType>({
+        min: 0,
+        max: 0,
+        count: 0,
+    });
+    /*const [minValue, setMinValue] = useState(0);
     const [maxValue, setMaxValue] = useState(0);
     const [count, setCount] = useState<number>(0);
     const [disableButSet, setDisableButSet] = useState(false);
-    const [text, setText] = useState(true);
-
+    const [text, setText] = useState(true);*/
     useEffect(() => {
-        let max = localStorage.getItem('max_value');
-        max && setMaxValue(JSON.parse(max));
         let min = localStorage.getItem('min_value');
-        min && setMinValue(JSON.parse(min));
-    }, [])
+        let max = localStorage.getItem('max_value');
+        min&&max&&setValue({...value, max: JSON.parse(max),min:JSON.parse(min)});
+    }, []);
     useEffect(() => {
-        localStorage.setItem('min_value', JSON.stringify(minValue));
-        localStorage.setItem('max_value', JSON.stringify(maxValue));
+        localStorage.setItem('max_value', JSON.stringify(value.max));
+        localStorage.setItem('min_value', JSON.stringify(value.min));
+    }, [value.max,value.min]);
 
-    }, [minValue, maxValue])
-    const changeMaxValue = (v: number) => {
-        setMaxValue(v);
+
+    const changeMaxValue = (max: number) => {
+        setValue({...value, max});
     }
 
-    const changeMinValue = (v: number) => {
-        setMinValue(v);
-        console.log('min' + minValue)
+    const changeMinValue = (min: number) => {
+        setValue({...value, min});
     }
     const changeCount = () => {
-        let value = count;
-        count <= maxValue && value++;
-        setCount(value);
+        let count = value.count;
+        value.count <= value.max && count++;
+        setValue({...value, count})
     }
-    const setZeroing = () => {
-        setCount(minValue);
-    }
+   /* const setZeroing = () => {
+        // setCount(minValue);
+        setValue({...value, count: value.min})
+    }*/
     const setInitialValue = () => {
-        setCount(minValue);
+        //setCount(minValue);
     }
     return (
         <div className="app">
-            <Count count={count}
+            <Count count={value.count}
                    changeCount={changeCount}
-                   setZeroing={setZeroing}
-                   maxValue={maxValue}
-                   minValue={minValue}
+                   setZeroing={()=>{}}
+                   maxValue={value.max}
+                   minValue={value.min}
             />
             <Set
                 changeMinValue={changeMinValue}
                 changeMaxValue={changeMaxValue}
-                maxValue={maxValue}
-                minValue={minValue}
+                maxValue={value.max}
+                minValue={value.min}
                 setInitialValue={setInitialValue}
             />
         </div>

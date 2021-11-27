@@ -2,13 +2,13 @@ import React, {ChangeEvent} from 'react';
 
 type PropsType = {
     type: string;
-    value: number;
+    valueInput: number;
     className: string;
     changeValue: (n:number) => void;
 }
 export const Input = ({
                           type,
-                          value,
+                          valueInput,
                           className,
                           changeValue,
                           ...props
@@ -25,7 +25,7 @@ export const Input = ({
     return (
         <span className={'span_input'}>
             <input type={type}
-                   value={value}
+                   value={valueInput}
                    onChange={onChange}
                    className={className}
             />
