@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {Count} from './exam_5.11.2021/components/Count';
 import {Set} from './exam_5.11.2021/components/Set';
@@ -40,22 +40,13 @@ export function App() {
                    setZeroing={setZeroing}
                    maxValue={maxValue}
                    minValue={minValue}
-                   disableButSet={disableButSet}
-                   text={text}
-                   changeText={changeText}
-
-                   setDisableButSet={setDisableButSet}
             />
             <Set
                 changeMinValue={changeMinValue}
                 changeMaxValue={changeMaxValue}
-                setInitialValue={setInitialValue}
-                setDisableButSet={setDisableButSet}
-                disableButSet={disableButSet}
-                minValue={minValue}
                 maxValue={maxValue}
-                changeText={changeText}
-                text={text}
+                minValue={minValue}
+                setInitialValue={setInitialValue}
             />
         </div>
     );

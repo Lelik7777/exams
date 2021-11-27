@@ -1,49 +1,36 @@
 import React from 'react';
 import {Button} from './Button';
-import {Display} from './Display';
+import {DisplayForSet} from './DisplayForSet';
 
 type PropsType = {
     changeMaxValue: (v: number) => void;
     changeMinValue: (v: number) => void;
-    setInitialValue: () => void;
-    setDisableButSet: (b: boolean) => void;
-    disableButSet: boolean;
     maxValue: number;
     minValue: number;
-    changeText: (b: boolean) => void;
-    text: boolean;
+    setInitialValue: () => void;
+
 }
 export const Set = ({
                         changeMinValue,
                         changeMaxValue,
-                        setInitialValue,
-                        setDisableButSet,
-                        disableButSet,
                         minValue,
                         maxValue,
-                        changeText,
-                        text,
+                        setInitialValue,
                     }: PropsType) => {
 
     const onClick = () => {
         setInitialValue();
-        setDisableButSet(true);
-        changeText(false);
     }
     return (
         <div className={'container'}>
-            <Display type={false}
-                     changeMaxValue={changeMaxValue}
-                     changeMinValue={changeMinValue}
-                     setDisableButSet={setDisableButSet}
-                     disableButSet={disableButSet}
-                     maxValue={maxValue}
-                     minValue={minValue}
-                     text={text}
-                     changeText={changeText}
+            <DisplayForSet
+                changeMaxValue={changeMaxValue}
+                changeMinValue={changeMinValue}
+                minValue={minValue}
+                maxValue={maxValue}
             />
             <div className={'wrapper_buttons_count'}>
-                <Button disabled={disableButSet}
+                <Button disabled={false}
                         title={'set'}
                         onClick={onClick}/>
             </div>
