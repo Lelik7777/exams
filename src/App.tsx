@@ -7,6 +7,7 @@ export type ValueType = {
     min: number;
     max: number;
     count: number;
+    message: boolean;
 }
 
 export function App() {
@@ -14,56 +15,60 @@ export function App() {
         min: 0,
         max: 0,
         count: 0,
+        message: true,
     });
-    /*const [minValue, setMinValue] = useState(0);
-    const [maxValue, setMaxValue] = useState(0);
-    const [count, setCount] = useState<number>(0);
-    const [disableButSet, setDisableButSet] = useState(false);
-    const [text, setText] = useState(true);*/
+    const [disableSet, setdisableSet] = useState(true);
+    useEffect(() => {
+        value.count = value.min;
+    }, [value.min])
     useEffect(() => {
         let min = localStorage.getItem('min_value');
         let max = localStorage.getItem('max_value');
-        min&&max&&setValue({...value, max: JSON.parse(max),min:JSON.parse(min)});
+        min && max && setValue({...value, max: JSON.parse(max), min: JSON.parse(min)});
     }, []);
     useEffect(() => {
         localStorage.setItem('max_value', JSON.stringify(value.max));
         localStorage.setItem('min_value', JSON.stringify(value.min));
-    }, [value.max,value.min]);
+    }, [value.max, value.min]);
 
-
-    const changeMaxValue = (max: number) => {
-        setValue({...value, max});
+    const setMaxValue = (max: number) => {
+        setValue({...value, max, message: true});
     }
 
-    const changeMinValue = (min: number) => {
-        setValue({...value, min});
+    const setMinValue = (min: number) => {
+        setValue({...value, min, message: true});
     }
     const changeCount = () => {
         let count = value.count;
         value.count <= value.max && count++;
         setValue({...value, count})
     }
-   /* const setZeroing = () => {
-        // setCount(minValue);
-        setValue({...value, count: value.min})
-    }*/
-    const setInitialValue = () => {
-        //setCount(minValue);
+    const setInitialValue = (min: number) => {
+        setValue({...value, count: min})
+    }
+    const showMessage = (message: boolean) => {
+        setValue({...value, message});
+    }
+    const changeDisableSet = (b: boolean) => {
+        setdisableSet(b);
     }
     return (
         <div className="app">
             <Count count={value.count}
-                   changeCount={changeCount}
-                   setZeroing={()=>{}}
                    maxValue={value.max}
                    minValue={value.min}
+                   changeCount={changeCount}
+                   setInitialValue={setInitialValue}
+                   message={value.message}
             />
             <Set
-                changeMinValue={changeMinValue}
-                changeMaxValue={changeMaxValue}
+                setMinValue={setMinValue}
+                setMaxValue={setMaxValue}
                 maxValue={value.max}
                 minValue={value.min}
-                setInitialValue={setInitialValue}
+                showMessage={showMessage}
+                disableSet={disableSet}
+                changeDisable={changeDisableSet}
             />
         </div>
     );

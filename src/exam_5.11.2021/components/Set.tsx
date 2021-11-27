@@ -3,34 +3,39 @@ import {Button} from './Button';
 import {DisplayForSet} from './DisplayForSet';
 
 type PropsType = {
-    changeMaxValue: (v: number) => void;
-    changeMinValue: (v: number) => void;
+    setMaxValue: (v: number) => void;
+    setMinValue: (v: number) => void;
     maxValue: number;
     minValue: number;
-    setInitialValue: () => void;
-
+    showMessage: (b: boolean) => void;
+    disableSet: boolean;
+    changeDisable: (b: boolean) => void;
 }
 export const Set = ({
-                        changeMinValue,
-                        changeMaxValue,
+                        setMinValue,
+                        setMaxValue,
                         minValue,
                         maxValue,
-                        setInitialValue,
+                        showMessage,
+                        disableSet,
+                        changeDisable,
                     }: PropsType) => {
 
     const onClick = () => {
-        setInitialValue();
+        showMessage(false);
+        changeDisable(true);
     }
     return (
         <div className={'container'}>
             <DisplayForSet
-                changeMaxValue={changeMaxValue}
-                changeMinValue={changeMinValue}
+                setMaxValue={setMaxValue}
+                setMinValue={setMinValue}
                 minValue={minValue}
                 maxValue={maxValue}
+                changeDisable={changeDisable}
             />
             <div className={'wrapper_buttons_count'}>
-                <Button disabled={false}
+                <Button disabled={disableSet}
                         title={'set'}
                         onClick={onClick}/>
             </div>

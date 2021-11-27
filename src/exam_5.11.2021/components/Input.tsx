@@ -2,30 +2,34 @@ import React, {ChangeEvent} from 'react';
 
 type PropsType = {
     type: string;
-    valueInput: number;
+    value: number;
     className: string;
-    changeValue: (n:number) => void;
+    changeValue: (n: number) => void;
+    changeDisable: (b: boolean) => void;
 }
 export const Input = ({
                           type,
-                          valueInput,
+                          value,
                           className,
                           changeValue,
+                          changeDisable,
                           ...props
                       }: PropsType) => {
 
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-        if (changeValue) {
+        debugger;
+        if (e.currentTarget) {
             changeValue(+e.currentTarget.value);
         }
+        changeDisable(false);
     }
-   // value >= 0 && minValue < maxValue ? setDisableButSet(false) : setDisableButSet(true);
+
 
     return (
         <span className={'span_input'}>
             <input type={type}
-                   value={valueInput}
+                   value={value}
                    onChange={onChange}
                    className={className}
             />
