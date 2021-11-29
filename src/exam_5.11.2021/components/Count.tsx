@@ -7,7 +7,7 @@ type PropsType = {
     minValue: number;
     count: number;
     changeCount: () => void;
-    setInitialValue: (m:number) => void;
+    setInitialValue: (m: number) => void;
     message: boolean;
 }
 export const Count = ({
@@ -19,7 +19,7 @@ export const Count = ({
                           message,
                       }: PropsType) => {
 
-    const onClick = ()=>setInitialValue(minValue);
+    const onClick = () => setInitialValue(minValue);
     return (
         <div className={'container'}>
             <Display
@@ -30,7 +30,7 @@ export const Count = ({
             />
             <div className={'wrapper_buttons_count'}>
                 <Button title={'inc'}
-                        disabled={count === maxValue||message ? true : false}
+                        disabled={count === maxValue || message ? true : false}
                         onClick={changeCount}
                 />
                 <Button title={'reset'}

@@ -17,7 +17,7 @@ export const DisplayForSet = ({
                                   minValue,
                                   changeDisable,
                               }: PropsType) => {
-    minValue >= 0 && minValue < maxValue ? changeDisable(false) : changeDisable(true);
+    //
     return (
         <div className={'display display_set'}>
             <div className={'block_dis_set'}>
@@ -28,6 +28,8 @@ export const DisplayForSet = ({
                     value={maxValue}
                     className={minValue >= maxValue ? 'error' : ''}
                     changeDisable={changeDisable}
+                    minValue={minValue}
+                    maxValue={maxValue}
                 />
             </div>
             <div className={'block_dis_set'}>
@@ -38,6 +40,8 @@ export const DisplayForSet = ({
                     value={minValue}
                     className={minValue < 0 ? 'error' : ''}
                     changeDisable={changeDisable}
+                    minValue={minValue}
+                    maxValue={maxValue}
                 />
             </div>
         </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button} from './Button';
 import {DisplayForSet} from './DisplayForSet';
 
@@ -8,8 +8,6 @@ type PropsType = {
     maxValue: number;
     minValue: number;
     showMessage: (b: boolean) => void;
-    disableSet: boolean;
-    changeDisable: (b: boolean) => void;
 }
 export const Set = ({
                         setMinValue,
@@ -17,13 +15,17 @@ export const Set = ({
                         minValue,
                         maxValue,
                         showMessage,
-                        disableSet,
-                        changeDisable,
                     }: PropsType) => {
-
+    const [disableSet, setDisableSet] = useState(true);
     const onClick = () => {
+        debugger
+        setDisableSet(true);
         showMessage(false);
-        changeDisable(true);
+
+        console.log(disableSet)
+    }
+    const changeDisableSet = (b: boolean) => {
+        setDisableSet(b);
     }
     return (
         <div className={'container'}>
@@ -32,12 +34,13 @@ export const Set = ({
                 setMinValue={setMinValue}
                 minValue={minValue}
                 maxValue={maxValue}
-                changeDisable={changeDisable}
+                changeDisable={changeDisableSet}
             />
             <div className={'wrapper_buttons_count'}>
                 <Button disabled={disableSet}
                         title={'set'}
-                        onClick={onClick}/>
+                        onClick={onClick}
+                />
             </div>
 
         </div>

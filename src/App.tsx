@@ -17,7 +17,7 @@ export function App() {
         count: 0,
         message: true,
     });
-    const [disableSet, setdisableSet] = useState(true);
+
     useEffect(() => {
         value.count = value.min;
     }, [value.min])
@@ -49,9 +49,6 @@ export function App() {
     const showMessage = (message: boolean) => {
         setValue({...value, message});
     }
-    const changeDisableSet = (b: boolean) => {
-        setdisableSet(b);
-    }
     return (
         <div className="app">
             <Count count={value.count}
@@ -67,8 +64,6 @@ export function App() {
                 maxValue={value.max}
                 minValue={value.min}
                 showMessage={showMessage}
-                disableSet={disableSet}
-                changeDisable={changeDisableSet}
             />
         </div>
     );
