@@ -6,11 +6,13 @@ html, body {
     justify-content: center;
     margin: 5% 0 0 0;
 }
-.app{
+
+.app {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .counter_1 {
     display: flex;
     justify-content: space-around;
@@ -106,11 +108,12 @@ button:disabled {
     text-align: center;
 }
 
+.switch_counters {
+    width: 30%;
+}
+
 @media screen and (max-width: 1000px ) {
-    .app {
+    .counter_1 {
         flex-direction: column;
     }
-}
-.switch_counters{
-    width: 30%;
 }
