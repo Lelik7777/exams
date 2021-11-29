@@ -34,7 +34,7 @@ export const Count = ({
                         onClick={changeCount}
                 />
                 <Button title={'reset'}
-                        disabled={minValue >= 0 && count > minValue ? false : true}
+                        disabled={(minValue >= 0 && count > minValue) ? false : true}
                         onClick={onClick}
                 />
             </div>

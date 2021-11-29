@@ -8,14 +8,14 @@ type PropsType = {
     setMinValue: (v: number) => void;
     maxValue: number;
     minValue: number;
-    changeDisable: (b: boolean) => void;
+    setDisableSet: (b: boolean) => void;
 }
 export const DisplayForSet = ({
                                   setMaxValue,
                                   setMinValue,
                                   maxValue,
                                   minValue,
-                                  changeDisable,
+                                  setDisableSet,
                               }: PropsType) => {
     //
     return (
@@ -27,7 +27,7 @@ export const DisplayForSet = ({
                     changeValue={setMaxValue}
                     value={maxValue}
                     className={minValue >= maxValue ? 'error' : ''}
-                    changeDisable={changeDisable}
+                    setDisableSet={setDisableSet}
                     minValue={minValue}
                     maxValue={maxValue}
                 />
@@ -38,8 +38,8 @@ export const DisplayForSet = ({
                     type={'number'}
                     changeValue={setMinValue}
                     value={minValue}
-                    className={minValue < 0 ? 'error' : ''}
-                    changeDisable={changeDisable}
+                    className={minValue < 0 || minValue >= maxValue ? 'error' : ''}
+                    setDisableSet={setDisableSet}
                     minValue={minValue}
                     maxValue={maxValue}
                 />

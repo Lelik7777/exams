@@ -11,7 +11,6 @@ export const Display = ({
                             maxValue,
                             minValue,
                             message,
-                            ...props
                         }: PropsType) => {
     const style = {
         color: count === maxValue ? 'red' : '',
@@ -21,15 +20,15 @@ export const Display = ({
         <div className={'display'}>
             <div className={'block_display'}>
                 {
-                    maxValue<=minValue||minValue<0
-                    ?
-                    <span className={'message error'}>Incorrect value!</span>
-                    :
-                    message
+                    maxValue <= minValue || minValue < 0
                         ?
-                        <span className={'message'}>enter values and press 'set'</span>
+                        <span className={'message error'}>Incorrect value!</span>
                         :
-                        <span className={'counter'} style={style}>{count}</span>
+                        message
+                            ?
+                            <span className={'message'}>enter values and press 'set'</span>
+                            :
+                            <span className={'counter'} style={style}>{count}</span>
                 }
 
             </div>

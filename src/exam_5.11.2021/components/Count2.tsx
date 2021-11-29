@@ -9,7 +9,7 @@ type PropsType = {
     changeCount: () => void;
     setInitialValue: (m: number) => void;
     message: boolean;
-    showMessageAndToggle: (b: boolean, t:boolean) => void;
+    showMessageAndToggle: (b: boolean, t: boolean) => void;
 }
 export const Count2 = ({
                            maxValue,
@@ -18,12 +18,12 @@ export const Count2 = ({
                            changeCount,
                            setInitialValue,
                            message,
-                         showMessageAndToggle,
+                           showMessageAndToggle,
                        }: PropsType) => {
 
     const onClick = () => setInitialValue(minValue);
     const onClick1 = () => {
-        showMessageAndToggle(false,true);
+        showMessageAndToggle(false, true);
     };
     return (
         <div className={'container'}>

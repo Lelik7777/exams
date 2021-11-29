@@ -5,7 +5,7 @@ type PropsType = {
     value: number;
     className: string;
     changeValue: (n: number) => void;
-    changeDisable: (b: boolean) => void;
+    setDisableSet: (b: boolean) => void;
     maxValue: number;
     minValue: number;
 }
@@ -14,10 +14,9 @@ export const Input = ({
                           value,
                           className,
                           changeValue,
-                          changeDisable,
+                          setDisableSet,
                           minValue,
                           maxValue,
-                          ...props
                       }: PropsType) => {
 
 
@@ -25,10 +24,10 @@ export const Input = ({
         if (e.currentTarget) {
             changeValue(+e.currentTarget.value);
         }
-        changeDisable(false);
-        +e.currentTarget.value < 0 && changeDisable(true);
+        setDisableSet(false);
+        +e.currentTarget.value < 0 && setDisableSet(true);
     }
-    maxValue <= minValue && changeDisable(true)
+    maxValue <= minValue && setDisableSet(true)
     return (
         <span className={'span_input'}>
             <input type={type}

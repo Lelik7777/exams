@@ -55,15 +55,14 @@ export function App() {
     const showMessageAndToggle = (message: boolean, two: boolean) => {
         if (two) {
             setValue({...value, message, toggle: two});
-        }
-        else
-        setValue({...value, message, toggle: false});
+        } else
+            setValue({...value, message, toggle: false});
     }
     const onClick = () => setValue({...value, variantCounters: !value.variantCounters});
     return (
         <div className="app">
             <Button disabled={false}
-                    title={'change counts'}
+                    title={'change counters'}
                     onClick={onClick}
                     className={'switch_counters'}
             />

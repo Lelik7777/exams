@@ -7,7 +7,7 @@ type PropsType = {
     setMinValue: (v: number) => void;
     maxValue: number;
     minValue: number;
-    showMessageAndToggle: (b: boolean, t:boolean) => void;
+    showMessageAndToggle: (b: boolean, t: boolean) => void;
 }
 export const Set = ({
                         setMinValue,
@@ -18,12 +18,8 @@ export const Set = ({
                     }: PropsType) => {
     const [disableSet, setDisableSet] = useState(true);
     const onClick = () => {
-        debugger
         setDisableSet(true);
-        showMessageAndToggle(false,false);
-    }
-    const changeDisableSet = (b: boolean) => {
-        setDisableSet(b);
+        showMessageAndToggle(false, false);
     }
     return (
         <div className={'container'}>
@@ -32,7 +28,7 @@ export const Set = ({
                 setMinValue={setMinValue}
                 minValue={minValue}
                 maxValue={maxValue}
-                changeDisable={changeDisableSet}
+                setDisableSet={setDisableSet}
             />
             <div className={'wrapper_buttons_count'}>
                 <Button disabled={disableSet}
