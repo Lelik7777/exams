@@ -1,34 +1,27 @@
 import React from 'react';
+import {ValueType} from '../../App';
 
 type PropsType = {
-    count: number;
-    maxValue: number;
-    minValue: number;
-    message: boolean;
+    data: ValueType;
 }
-export const Display = ({
-                            count,
-                            maxValue,
-                            minValue,
-                            message,
-                        }: PropsType) => {
+export const Display = ({data}: PropsType) => {
     const style = {
-        color: count === maxValue ? 'red' : '',
+        color: data.count === data.max ? 'red' : '',
     }
     return (
 
         <div className={'display'}>
             <div className={'block_display'}>
                 {
-                    maxValue <= minValue || minValue < 0
+                    data.max <= data.min || data.min < 0
                         ?
                         <span className={'message error'}>Incorrect value!</span>
                         :
-                        message
+                        data.message
                             ?
                             <span className={'message'}>enter values and press 'set'</span>
                             :
-                            <span className={'counter'} style={style}>{count}</span>
+                            <span className={'counter'} style={style}>{data.count}</span>
                 }
 
             </div>

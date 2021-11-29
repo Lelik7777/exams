@@ -5,6 +5,12 @@ import {Set} from './exam_5.11.2021/components/Set';
 import {Button} from './exam_5.11.2021/components/Button';
 import {Count2} from './exam_5.11.2021/components/Count2';
 
+export type ActionType = {
+    type: 'setMaxValue' | 'setMinValue' | 'changeCount' | 'setInitialValue' | 'showMessageAndToggle';
+    b?: boolean;
+    b2?: boolean;
+    n?: number;
+}
 export type ValueType = {
     min: number;
     max: number;
@@ -15,6 +21,7 @@ export type ValueType = {
 }
 
 export function App() {
+
     const [value, setValue] = useState<ValueType>({
         min: 0,
         max: 0,
@@ -37,27 +44,30 @@ export function App() {
         localStorage.setItem('min_value', JSON.stringify(value.min));
     }, [value.max, value.min]);
 
-    const setMaxValue = (max: number) => {
-        setValue({...value, max, message: true});
+    const reducer: (a: ActionType) => void = (action) => {
+        switch (action.type) {
+            case 'setMinValue':
+                return action.n !== undefined && setValue({...value, min: action.n, message: true});
+
+            case 'setMaxValue':
+                return action.n !== undefined && setValue({...value, max: action.n, message: true});
+            case 'changeCount':
+                let count = value.count;
+                value.count <= value.max && count++;
+                return setValue({...value, count});
+            case 'setInitialValue':
+                return action.n !== undefined && setValue({...value, count: action.n});
+            case 'showMessageAndToggle':
+                return action.b !== undefined && action.b2 !== undefined && setValue({
+                    ...value,
+                    message: action.b,
+                    toggle: action.b2
+                });
+            default:
+                return setValue(value);
+        }
     }
 
-    const setMinValue = (min: number) => {
-        setValue({...value, min, message: true});
-    }
-    const changeCount = () => {
-        let count = value.count;
-        value.count <= value.max && count++;
-        setValue({...value, count})
-    }
-    const setInitialValue = (min: number) => {
-        setValue({...value, count: min})
-    }
-    const showMessageAndToggle = (message: boolean, two: boolean) => {
-        if (two) {
-            setValue({...value, message, toggle: two});
-        } else
-            setValue({...value, message, toggle: false});
-    }
     const onClick = () => {
         setValue({...value, variantCounters: !value.variantCounters});
     }
@@ -74,39 +84,24 @@ export function App() {
                     {
                         !value.toggle ?
                             <Count2
-                                maxValue={value.max}
-                                minValue={value.min}
-                                count={value.count}
-                                changeCount={changeCount}
-                                setInitialValue={setInitialValue}
-                                message={value.message}
-                                showMessageAndToggle={showMessageAndToggle}
+                                data={value}
+                                reducer={reducer}
                             />
                             :
                             <Set
-                                setMaxValue={setMaxValue}
-                                setMinValue={setMinValue}
-                                maxValue={value.max}
-                                minValue={value.min}
-                                showMessageAndToggle={showMessageAndToggle}
+                                data={value}
+                                reducer={reducer}
                             />
                     }
                 </div>
                 :
                 <div className={'counter_1'}>
-                    <Count count={value.count}
-                           maxValue={value.max}
-                           minValue={value.min}
-                           changeCount={changeCount}
-                           setInitialValue={setInitialValue}
-                           message={value.message}
+                    <Count data={value}
+                           reducer={reducer}
                     />
                     <Set
-                        setMinValue={setMinValue}
-                        setMaxValue={setMaxValue}
-                        maxValue={value.max}
-                        minValue={value.min}
-                        showMessageAndToggle={showMessageAndToggle}
+                        reducer={reducer}
+                        data={value}
                     />
                 </div>
             }

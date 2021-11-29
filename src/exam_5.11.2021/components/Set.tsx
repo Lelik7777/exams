@@ -1,33 +1,23 @@
 import React, {useState} from 'react';
 import {Button} from './Button';
 import {DisplayForSet} from './DisplayForSet';
+import {ActionType, ValueType} from '../../App';
 
 type PropsType = {
-    setMaxValue: (v: number) => void;
-    setMinValue: (v: number) => void;
-    maxValue: number;
-    minValue: number;
-    showMessageAndToggle: (b: boolean, t: boolean) => void;
+    data: ValueType;
+    reducer: (a: ActionType) => void;
 }
-export const Set = ({
-                        setMinValue,
-                        setMaxValue,
-                        minValue,
-                        maxValue,
-                        showMessageAndToggle,
-                    }: PropsType) => {
+export const Set = ({data, reducer}: PropsType) => {
     const [disableSet, setDisableSet] = useState(true);
     const onClick = () => {
         setDisableSet(true);
-        showMessageAndToggle(false, false);
+        reducer({type: 'showMessageAndToggle', b: false, b2: false});
     }
     return (
         <div className={'container'}>
             <DisplayForSet
-                setMaxValue={setMaxValue}
-                setMinValue={setMinValue}
-                minValue={minValue}
-                maxValue={maxValue}
+                data={data}
+                reducer={reducer}
                 setDisableSet={setDisableSet}
             />
             <div className={'wrapper_buttons_count'}>

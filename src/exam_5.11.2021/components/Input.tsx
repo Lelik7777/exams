@@ -1,13 +1,13 @@
 import React, {ChangeEvent} from 'react';
+import {ValueType} from '../../App';
 
 type PropsType = {
+    data: ValueType;
     type: string;
     value: number;
     className: string;
     changeValue: (n: number) => void;
     setDisableSet: (b: boolean) => void;
-    maxValue: number;
-    minValue: number;
 }
 export const Input = ({
                           type,
@@ -15,8 +15,7 @@ export const Input = ({
                           className,
                           changeValue,
                           setDisableSet,
-                          minValue,
-                          maxValue,
+                          data,
                       }: PropsType) => {
 
 
@@ -27,7 +26,7 @@ export const Input = ({
         setDisableSet(false);
         +e.currentTarget.value < 0 && setDisableSet(true);
     }
-    maxValue <= minValue && setDisableSet(true)
+    data.max <= data.min && setDisableSet(true)
     return (
         <span className={'span_input'}>
             <input type={type}

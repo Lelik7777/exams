@@ -1,48 +1,33 @@
 import React from 'react';
 import {Button} from './Button';
 import {Display} from './Display';
+import {ActionType, ValueType} from '../../App';
 
 type PropsType = {
-    maxValue: number;
-    minValue: number;
-    count: number;
-    changeCount: () => void;
-    setInitialValue: (m: number) => void;
-    message: boolean;
-    showMessageAndToggle: (b: boolean, t: boolean) => void;
+    data: ValueType;
+    reducer: (a: ActionType) => void;
 }
-export const Count2 = ({
-                           maxValue,
-                           minValue,
-                           count,
-                           changeCount,
-                           setInitialValue,
-                           message,
-                           showMessageAndToggle,
-                       }: PropsType) => {
+export const Count2 = ({data, reducer}: PropsType) => {
 
-    const onClick = () => setInitialValue(minValue);
-    const onClick1 = () => {
-        showMessageAndToggle(false, true);
-    };
+    const onClickReset = () => reducer({type: 'setInitialValue', n: data.min});
+    const onClickSet = () => reducer({type: 'showMessageAndToggle', b: false, b2: true});
+    const changeCount = () => reducer({type: 'changeCount'});
+
     return (
         <div className={'container'}>
             <Display
-                count={count}
-                maxValue={maxValue}
-                minValue={minValue}
-                message={message}
+                data={data}
             />
             <div className={'wrapper_buttons_count'}>
                 <Button title={'inc'}
-                        disabled={count === maxValue || message ? true : false}
+                        disabled={data.count === data.max || data.message ? true : false}
                         onClick={changeCount}
                 />
                 <Button title={'reset'}
-                        disabled={minValue >= 0 && count > minValue ? false : true}
-                        onClick={onClick}
+                        disabled={data.min >= 0 && data.count > data.min ? false : true}
+                        onClick={onClickReset}
                 />
-                <Button disabled={false} title={'set'} onClick={onClick1}/>
+                <Button disabled={false} title={'set'} onClick={onClickSet}/>
             </div>
 
         </div>
