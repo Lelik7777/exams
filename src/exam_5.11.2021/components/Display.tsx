@@ -23,7 +23,7 @@ export const Display = ({
                 {
                     maxValue<=minValue||minValue<0
                     ?
-                    <span className={'message error'}>Incorrected value!</span>
+                    <span className={'message error'}>Incorrect value!</span>
                     :
                     message
                         ?

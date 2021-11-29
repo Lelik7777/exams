@@ -6,8 +6,12 @@ html, body {
     justify-content: center;
     margin: 5% 0 0 0;
 }
-
-.app {
+.app{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.counter_1 {
     display: flex;
     justify-content: space-around;
 }
@@ -93,8 +97,8 @@ button:disabled {
     height: 8vh;
     text-align: center;
     font-size: 1.2rem;
+    cursor: pointer;
 }
-
 
 .span_value {
     display: inline-block;
@@ -102,13 +106,11 @@ button:disabled {
     text-align: center;
 }
 
-.value_less_zero {
-    background-color: darkorange;
-    border: 2px solid red;
-}
-
 @media screen and (max-width: 1000px ) {
     .app {
         flex-direction: column;
     }
+}
+.switch_counters{
+    width: 30%;
 }

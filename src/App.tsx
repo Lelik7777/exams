@@ -2,12 +2,16 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Count} from './exam_5.11.2021/components/Count';
 import {Set} from './exam_5.11.2021/components/Set';
+import {Button} from './exam_5.11.2021/components/Button';
+import {Count2} from './exam_5.11.2021/components/Count2';
 
 export type ValueType = {
     min: number;
     max: number;
     count: number;
     message: boolean;
+    variantCounters: boolean;
+    toggle: boolean;
 }
 
 export function App() {
@@ -16,6 +20,8 @@ export function App() {
         max: 0,
         count: 0,
         message: true,
+        variantCounters: true,
+        toggle: true,
     });
 
     useEffect(() => {
@@ -46,25 +52,63 @@ export function App() {
     const setInitialValue = (min: number) => {
         setValue({...value, count: min})
     }
-    const showMessage = (message: boolean) => {
-        setValue({...value, message});
+    const showMessageAndToggle = (message: boolean, two: boolean) => {
+        if (two) {
+            setValue({...value, message, toggle: two});
+        }
+        else
+        setValue({...value, message, toggle: false});
     }
+    const onClick = () => setValue({...value, variantCounters: !value.variantCounters});
     return (
         <div className="app">
-            <Count count={value.count}
-                   maxValue={value.max}
-                   minValue={value.min}
-                   changeCount={changeCount}
-                   setInitialValue={setInitialValue}
-                   message={value.message}
+            <Button disabled={false}
+                    title={'change counts'}
+                    onClick={onClick}
+                    className={'switch_counters'}
             />
-            <Set
-                setMinValue={setMinValue}
-                setMaxValue={setMaxValue}
-                maxValue={value.max}
-                minValue={value.min}
-                showMessage={showMessage}
-            />
+            {value.variantCounters
+                ?
+                <div className="counter_2">
+                    {
+                        !value.toggle ?
+                            <Count2
+                                maxValue={value.max}
+                                minValue={value.min}
+                                count={value.count}
+                                changeCount={changeCount}
+                                setInitialValue={setInitialValue}
+                                message={value.message}
+                                showMessageAndToggle={showMessageAndToggle}
+                            />
+                            :
+                            <Set
+                                setMaxValue={setMaxValue}
+                                setMinValue={setMinValue}
+                                maxValue={value.max}
+                                minValue={value.min}
+                                showMessageAndToggle={showMessageAndToggle}
+                            />
+                    }
+                </div>
+                :
+                <div className={'counter_1'}>
+                    <Count count={value.count}
+                           maxValue={value.max}
+                           minValue={value.min}
+                           changeCount={changeCount}
+                           setInitialValue={setInitialValue}
+                           message={value.message}
+                    />
+                    <Set
+                        setMinValue={setMinValue}
+                        setMaxValue={setMaxValue}
+                        maxValue={value.max}
+                        minValue={value.min}
+                        showMessageAndToggle={showMessageAndToggle}
+                    />
+                </div>
+            }
         </div>
     );
 }

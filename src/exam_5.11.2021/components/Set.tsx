@@ -7,22 +7,20 @@ type PropsType = {
     setMinValue: (v: number) => void;
     maxValue: number;
     minValue: number;
-    showMessage: (b: boolean) => void;
+    showMessageAndToggle: (b: boolean, t:boolean) => void;
 }
 export const Set = ({
                         setMinValue,
                         setMaxValue,
                         minValue,
                         maxValue,
-                        showMessage,
+                        showMessageAndToggle,
                     }: PropsType) => {
     const [disableSet, setDisableSet] = useState(true);
     const onClick = () => {
         debugger
         setDisableSet(true);
-        showMessage(false);
-
-        console.log(disableSet)
+        showMessageAndToggle(false,false);
     }
     const changeDisableSet = (b: boolean) => {
         setDisableSet(b);
