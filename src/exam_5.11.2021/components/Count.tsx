@@ -5,13 +5,13 @@ import {ActionType, ValueType} from '../../App';
 
 type PropsType = {
     data: ValueType;
-    reducer: (a: ActionType) => void;
+    reduce: (a: ActionType) => void;
 }
-export const Count = ({data, reducer}: PropsType) => {
+export const Count = ({data, reduce}: PropsType) => {
 
-    const onClick = () => reducer({type: 'setInitialValue', n: data.min});
+    const onClick = () => reduce({type: 'setInitialValue', num: data.min});
 
-    const changeCount = () => reducer({type: 'changeCount'});
+    const changeCount = () => reduce({type: 'changeCount'});
 
     return (
         <div className={'container'}>
@@ -20,11 +20,11 @@ export const Count = ({data, reducer}: PropsType) => {
             />
             <div className={'wrapper_buttons_count'}>
                 <Button title={'inc'}
-                        disabled={data.count === data.max || data.message ? true : false}
+                        disabled={data.count === data.max || data.message}
                         onClick={changeCount}
                 />
                 <Button title={'reset'}
-                        disabled={(data.min >= 0 && data.count > data.min) ? false : true}
+                        disabled={data.min <= 0 && data.count < data.min}
                         onClick={onClick}
                 />
             </div>

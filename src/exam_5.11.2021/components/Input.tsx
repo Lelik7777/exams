@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useEffect} from 'react';
 import {ValueType} from '../../App';
 
 type PropsType = {
@@ -20,13 +20,20 @@ export const Input = ({
 
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+
+        const valueInput = e.currentTarget.valueAsNumber;
         if (e.currentTarget) {
-            changeValue(+e.currentTarget.value);
+            changeValue(valueInput);
         }
         setDisableSet(false);
-        +e.currentTarget.value < 0 && setDisableSet(true);
+        valueInput < 0 && setDisableSet(true);
     }
-    data.max <= data.min && setDisableSet(true)
+
+    useEffect(() => {
+        data.max <= data.min && setDisableSet(true)
+    }, [])
+
+
     return (
         <span className={'span_input'}>
             <input type={type}

@@ -1,15 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import {Count} from './exam_5.11.2021/components/Count';
-import {Set} from './exam_5.11.2021/components/Set';
 import {Button} from './exam_5.11.2021/components/Button';
-import {Count2} from './exam_5.11.2021/components/Count2';
+import {CountOneDisplay} from './exam_5.11.2021/components/CountOneDisplay';
+import {CounterTwoDisplays} from './exam_5.11.2021/components/CounterTwoDisplays';
 
 export type ActionType = {
     type: 'setMaxValue' | 'setMinValue' | 'changeCount' | 'setInitialValue' | 'showMessageAndToggle';
-    b?: boolean;
-    b2?: boolean;
-    n?: number;
+    message?: boolean;
+    toggle?: boolean;
+    num?: number;
 }
 export type ValueType = {
     min: number;
@@ -32,36 +31,39 @@ export function App() {
     });
 
     useEffect(() => {
-        value.count = value.min;
+        setValue({...value, count: value.min})
     }, [value.min])
+
     useEffect(() => {
-        let min = localStorage.getItem('min_value');
-        let max = localStorage.getItem('max_value');
-        min && max && setValue({...value, max: JSON.parse(max), min: JSON.parse(min)});
+        const valueL = localStorage.getItem('value');
+        valueL && setValue({...value, max: JSON.parse(valueL).max, min: JSON.parse(valueL).min});
     }, []);
     useEffect(() => {
-        localStorage.setItem('max_value', JSON.stringify(value.max));
-        localStorage.setItem('min_value', JSON.stringify(value.min));
+        const valueL = {
+            max: value.max,
+            min: value.min
+        }
+        localStorage.setItem('value', JSON.stringify(valueL));
+
     }, [value.max, value.min]);
 
-    const reducer: (a: ActionType) => void = (action) => {
+    const reduce: (a: ActionType) => void = (action) => {
         switch (action.type) {
             case 'setMinValue':
-                return action.n !== undefined && setValue({...value, min: action.n, message: true});
-
+                return action.num !== undefined && setValue({...value, min: action.num, message: true});
             case 'setMaxValue':
-                return action.n !== undefined && setValue({...value, max: action.n, message: true});
+                return action.num !== undefined && setValue({...value, max: action.num, message: true});
             case 'changeCount':
                 let count = value.count;
                 value.count <= value.max && count++;
                 return setValue({...value, count});
             case 'setInitialValue':
-                return action.n !== undefined && setValue({...value, count: action.n});
+                return action.num !== undefined && setValue({...value, count: action.num});
             case 'showMessageAndToggle':
-                return action.b !== undefined && action.b2 !== undefined && setValue({
+                return action.message !== undefined && action.toggle !== undefined && setValue({
                     ...value,
-                    message: action.b,
-                    toggle: action.b2
+                    message: action.message,
+                    toggle: action.toggle
                 });
             default:
                 return setValue(value);
@@ -80,32 +82,10 @@ export function App() {
             />
             {value.variantCounters
                 ?
-                <div className="counter_2">
-                    {
-                        !value.toggle ?
-                            <Count2
-                                data={value}
-                                reducer={reducer}
-                            />
-                            :
-                            <Set
-                                data={value}
-                                reducer={reducer}
-                            />
-                    }
-                </div>
+                <CountOneDisplay value={value} reduce={reduce}/>
                 :
-                <div className={'counter_1'}>
-                    <Count data={value}
-                           reducer={reducer}
-                    />
-                    <Set
-                        reducer={reducer}
-                        data={value}
-                    />
-                </div>
+                <CounterTwoDisplays value={value} reduce={reduce}/>
             }
         </div>
     );
 }
-

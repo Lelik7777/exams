@@ -5,19 +5,19 @@ import {ActionType, ValueType} from '../../App';
 
 type PropsType = {
     data: ValueType;
-    reducer: (a: ActionType) => void;
+    reduce: (a: ActionType) => void;
 }
-export const Set = ({data, reducer}: PropsType) => {
+export const Set = ({data, reduce}: PropsType) => {
     const [disableSet, setDisableSet] = useState(true);
     const onClick = () => {
         setDisableSet(true);
-        reducer({type: 'showMessageAndToggle', b: false, b2: false});
+        reduce({type: 'showMessageAndToggle', message: false, toggle: false});
     }
     return (
         <div className={'container'}>
             <DisplayForSet
                 data={data}
-                reducer={reducer}
+                reduce={reduce}
                 setDisableSet={setDisableSet}
             />
             <div className={'wrapper_buttons_count'}>
