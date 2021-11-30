@@ -3,18 +3,18 @@ import {Set} from './Set';
 import React from 'react';
 import {ActionType, ValueType} from '../../App';
 
-type PropsType={
-    value:ValueType;
-    reduce: (a: ActionType) => void;
+type PropsType = {
+    value: ValueType;
+    dispatch: (a: ActionType) => void;
 }
-export const CounterTwoDisplays = ({value,reduce}:PropsType) => {
+export const CounterTwoDisplays = ({value, dispatch}: PropsType) => {
     return (
         <div className={'counter_1'}>
             <Count data={value}
-                   reduce={reduce}
+                   dispatch={dispatch}
             />
             <Set
-                reduce={reduce}
+                dispatch={dispatch}
                 data={value}
             />
         </div>

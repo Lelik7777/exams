@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Button} from './exam_5.11.2021/components/Button';
-import {CountOneDisplay} from './exam_5.11.2021/components/CountOneDisplay';
+import {CounterOneDisplay} from './exam_5.11.2021/components/CountOneDisplay';
 import {CounterTwoDisplays} from './exam_5.11.2021/components/CounterTwoDisplays';
 
 export type ActionType = {
@@ -35,19 +35,20 @@ export function App() {
     }, [value.min])
 
     useEffect(() => {
-        const valueL = localStorage.getItem('value');
+        const valueL = localStorage.getItem('counter');
+
         valueL && setValue({...value, max: JSON.parse(valueL).max, min: JSON.parse(valueL).min});
     }, []);
+
     useEffect(() => {
         const valueL = {
             max: value.max,
             min: value.min
         }
-        localStorage.setItem('value', JSON.stringify(valueL));
-
+        localStorage.setItem('counter', JSON.stringify(valueL));
     }, [value.max, value.min]);
 
-    const reduce: (a: ActionType) => void = (action) => {
+    const dispatch: (a: ActionType) => void = (action) => {
         switch (action.type) {
             case 'setMinValue':
                 return action.num !== undefined && setValue({...value, min: action.num, message: true});
@@ -81,10 +82,8 @@ export function App() {
                     className={'switch_counters'}
             />
             {value.variantCounters
-                ?
-                <CountOneDisplay value={value} reduce={reduce}/>
-                :
-                <CounterTwoDisplays value={value} reduce={reduce}/>
+                ? <CounterOneDisplay value={value} dispatch={dispatch}/>
+                : <CounterTwoDisplays value={value} dispatch={dispatch}/>
             }
         </div>
     );

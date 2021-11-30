@@ -5,19 +5,15 @@ import {ActionType, ValueType} from '../../App';
 
 type PropsType = {
     value: ValueType;
-    reduce: (a: ActionType) => void;
+    dispatch: (a: ActionType) => void;
 }
-export const CountOneDisplay = ({value,reduce}:PropsType) => {
+export const CounterOneDisplay = ({value, dispatch}: PropsType) => {
     return (
         <div className="counter_2">
             {
-                !value.toggle ?
-                    <Count2 data={value} reduce={reduce}/>
-                    :
-                    <Set
-                        data={value}
-                        reduce={reduce}
-                    />
+                value.toggle
+                    ? <Set data={value} dispatch={dispatch}/>
+                    : <Count2 data={value} dispatch={dispatch}/>
             }
         </div>
     )

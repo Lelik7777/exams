@@ -18,6 +18,9 @@ export const Input = ({
                           data,
                       }: PropsType) => {
 
+    useEffect(() => {
+        data.max <= data.min && setDisableSet(true)
+    },[]);
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
 
@@ -29,9 +32,7 @@ export const Input = ({
         valueInput < 0 && setDisableSet(true);
     }
 
-    useEffect(() => {
-        data.max <= data.min && setDisableSet(true)
-    }, [])
+
 
 
     return (

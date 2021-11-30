@@ -6,16 +6,16 @@ import {ActionType, ValueType} from '../../App';
 
 type PropsType = {
     data: ValueType;
-    reduce: (a: ActionType) => void;
+    dispatch: (a: ActionType) => void;
     setDisableSet: (b: boolean) => void;
 }
-export const DisplayForSet = ({data, reduce, setDisableSet,}: PropsType) => {
+export const DisplayForSet = ({data, dispatch, setDisableSet,}: PropsType) => {
     //
     const changeValue = (n: number) => {
-        reduce({type: 'setMinValue', num: n});
+        dispatch({type: 'setMinValue', num: n});
     }
     const changeValue2 = (n: number) => {
-        reduce({type: 'setMaxValue', num: n});
+        dispatch({type: 'setMaxValue', num: n});
     }
     return (
         <div className={'display display_set'}>
